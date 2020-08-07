@@ -1,5 +1,5 @@
 # pokerface
 
-idk how go works, so you might need to run some of these commands if you set this up on a new machine
+I think to get it running you will need to run `go get github.com/gorilla/websocket` from anywhere
+and then from the src directory run `go run main.go`
 
-`go get github.com/gorilla/websocket`
