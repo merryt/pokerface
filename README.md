@@ -1,5 +1,7 @@
 # pokerface
 
-I think to get it running you will need to run `go get github.com/gorilla/websocket` from anywhere
-and then from the src directory run `go run main.go`
+
+I think to get it running you will need to:
+- Run `go get github.com/gorilla/websocket` from anywhere
+- Then from the src directory run `go run main.go`
 
