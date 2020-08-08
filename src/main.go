@@ -4,6 +4,7 @@ import(
 	"log"
 	"fmt"
 	"net/http"
+	"math/rand"
 	"github.com/gorilla/websocket"
 )
 
@@ -37,19 +38,24 @@ func buildDeck() []Card {
 			deck = append(deck, newCard)
 		}
 	}
-	for _,card := range deck{
-		fmt.Println(card)
-	}
+	return deck
+}
+
+func shuffleDeck(deck []Card) []Card{
+	rand.Shuffle(len(deck), func(i, j int) {
+		deck[i], deck[j] = deck[j], deck[i]
+	})
 	return deck
 }
 
 func main() {
 
 	fmt.Println("----")
-	buildDeck()
-	//for _,card := range newDeck{
-	//	fmt.Println(card)
-	//}
+	var newDeck = buildDeck()
+	var shuffledDeck = shuffleDeck(newDeck)
+	for _,card := range shuffledDeck{
+		fmt.Println(card)
+	}
 
 	fmt.Println("~~~~~")
 	// create a simple file server
