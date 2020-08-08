@@ -2,6 +2,7 @@ package main
 
 import(
 	"log"
+	"fmt"
 	"net/http"
 	"github.com/gorilla/websocket"
 )
@@ -17,7 +18,34 @@ type Message struct {
 	Message string `json: "message"`
 }
 
+
+
+type Card struct{
+	Suit string
+	Value int
+}
+
+
 func main() {
+	values := [13]int{2,3,4,5,6,7,8,9,10,11,12,13,14}
+	suits := [4]string{"spades","clubs","dimonds","hearts"}
+	deck  := []Card{}
+
+	for _,suit := range suits {
+		for _, value := range values{
+			var newCard Card
+			newCard.Suit = suit
+			newCard.Value = value
+			deck = append(deck, newCard)
+		}
+	}
+	fmt.Println("----")
+
+	for _,card := range deck{
+		fmt.Println(card)
+	}
+
+	fmt.Println("~~~~~")
 	// create a simple file server
 	fs := http.FileServer(http.Dir("../public"))
 	http.Handle("/",fs)
