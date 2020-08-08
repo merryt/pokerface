@@ -25,12 +25,10 @@ type Card struct{
 	Value int
 }
 
-
-func main() {
+func buildDeck() []Card {
 	values := [13]int{2,3,4,5,6,7,8,9,10,11,12,13,14}
 	suits := [4]string{"spades","clubs","dimonds","hearts"}
 	deck  := []Card{}
-
 	for _,suit := range suits {
 		for _, value := range values{
 			var newCard Card
@@ -39,11 +37,19 @@ func main() {
 			deck = append(deck, newCard)
 		}
 	}
-	fmt.Println("----")
-
 	for _,card := range deck{
 		fmt.Println(card)
 	}
+	return deck
+}
+
+func main() {
+
+	fmt.Println("----")
+	buildDeck()
+	//for _,card := range newDeck{
+	//	fmt.Println(card)
+	//}
 
 	fmt.Println("~~~~~")
 	// create a simple file server
