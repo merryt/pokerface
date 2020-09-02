@@ -1,0 +1,12 @@
+{
+  "name": "pokerface",
+  "version": "0.0.1",
+  "description": "pokerstars + zoom",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-router": "^4.5.4"
+  }
+}
