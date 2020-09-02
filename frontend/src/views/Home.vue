@@ -10,7 +10,9 @@
         <button type="submit" v-on:click="newGame">Create!</button>
         <h3>Current Games</h3>
         <ul id="games">
-            <li v-for="game in games" v-bind:key="game.id">{{game.name}} -- {{game.status}}</li>
+            <li v-for="game in games" v-bind:key="game.id">
+                <router-link :to="{path: '/game/' + game.id ,params:{id:game.id}}">{{game.name}}</router-link> -- {{game.status}}
+            </li>
         </ul>         
     </div>
 </template>
@@ -19,7 +21,7 @@
 import io from 'socket.io-client'
 
 export default {
-    name: 'HelloWorld',
+    name: 'Home',
     data: function(){
         return {
             games:[
@@ -48,7 +50,7 @@ export default {
     created: function(){
         console.log("starting up home components")
         this.socket = io('http://localhost:3000')
-
+        this.socket.emit('request games')
 
         this.socket.on('list games', (games) => {
             this.games = games

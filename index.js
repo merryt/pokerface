@@ -33,6 +33,10 @@ io.on('connection', (socket) => {
         io.emit('list games', games)
     })
 
+    socket.on('request games',() => {
+        io.emit('list games', games)
+    })
+
 	socket.on('disconnect', () => {
 		console.log("a user has dissconnected")
 	});
