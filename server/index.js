@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
     // TODO:
     // this is currently broken because it is messing up all kinds of relative paths
     // look how to deploy a project that uses Vue CLI + node backend
-    res.sendFile(__dirname + '/frontend/dist/index.html');
+    res.sendFile(__dirname + '../frontend/dist/index.html');
 
 });
 
@@ -22,6 +22,7 @@ suites.forEach((suit) => {
 
 
 games = []
+
 
 
 io.on('connection', (socket) => {
@@ -52,11 +53,16 @@ io.on('connection', (socket) => {
 
 
     // joining a specific table
-    socket.on('join table',(id) => {
+    socket.on('join table',(table_id) => {
         // add player to participants array for that game
+        games.forEach((game) =>{
+            if(game.id = table_id){
+                game.participants.push(socket.id)
+            }
+        });
         // have that player join that room
-        socket.join(id);
-        io.to(id).emit("room message", "Someone joined " + id)
+        socket.join(table_id);
+        io.to(table_id).emit("room message", "Someone joined " + table_id)
     });
 
 

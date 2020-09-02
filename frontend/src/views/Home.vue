@@ -52,8 +52,9 @@ export default {
         this.socket = io('http://localhost:3000');
         this.socket.emit('join table', 'lobby');
         this.socket.emit('request games');
-
+        console.log(this.socket)
         this.socket.on('list games', (games) => {
+            //console.log(games);    
             this.games = games
         });
 
