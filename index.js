@@ -11,9 +11,15 @@ app.get('/', (req, res) => {
 });
 
 
+const suites = ["s", "h", "c", "d"]
+const values = ["a",2,3,4,5,6,7,8,9,10,"j","q","k"]
+let unshuffledDeck = []
+suites.forEach((suit) => {
+    values.forEach((value)=>{
+        unshuffledDeck.push(value+suit)
+    })
+})
 
-const suites = ["spades", "hearts", "clubs", "diamonds"]
-const values = [1,2,3,4,5,6,7,8,9,10,11,12,13]
 
 games = []
 
@@ -28,7 +34,9 @@ io.on('connection', (socket) => {
         games.push({
             "name": name,
             "id": Date.now(),
-            "status": "sheaduled"
+            "status": "sheaduled",
+            "participants": [],
+            "seatedPlayers": [],
         })
         io.emit('list games', games)
     })
@@ -40,6 +48,24 @@ io.on('connection', (socket) => {
 	socket.on('disconnect', () => {
 		console.log("a user has dissconnected")
 	});
+
+
+
+    // joining a specific table
+    socket.on('join table',(id) => {
+        // add player to participants array for that game
+        // have that player join that room
+        socket.join(id);
+        io.to(id).emit("room message", "Someone joined " + id)
+    });
+
+
+    socket.on('take a seat', (id) => {
+        console.log("someone is taking a seat")
+    })
+    // going to need to create a loop that represents dealing the cards
+    // lets make indian poker firce
+
 });
 
 

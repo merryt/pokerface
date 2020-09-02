@@ -48,15 +48,18 @@ export default {
         }
     },
     created: function(){
-        console.log("starting up home components")
-        this.socket = io('http://localhost:3000')
-        this.socket.emit('request games')
+        console.log("starting up home components");
+        this.socket = io('http://localhost:3000');
+        this.socket.emit('join table', 'lobby');
+        this.socket.emit('request games');
 
         this.socket.on('list games', (games) => {
             this.games = games
         });
 
-    
+        this.socket.on('room message', (msg) =>{
+            console.log(msg)
+        }); 
     }
 }
 </script>

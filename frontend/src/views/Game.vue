@@ -1,6 +1,9 @@
 <template>
     <div class="hello">
         <h3>Poker Table</h3>
+        <!-- render table -->
+        <!-- render list of players who are watching -->
+        <!-- redner people sitting at table -->
     </div>
 </template>
 
@@ -32,15 +35,27 @@ export default {
         }
     },
     created: function(){
-        console.log("starting up home components")
         this.socket = io('http://localhost:3000')
         this.socket.emit('request games')
+        this.socket.emit('join table', this.id)
+        
+        console.log(this.socket)
+
+        // and when you send messages use this syntax
+        // socket.to(this.id).emit('some event');
+
+        // get list of people at table
+        // get list of people seated at table
+
 
         this.socket.on('list games', (games) => {
             this.games = games
         });
 
-    
+        this.socket.on("room message", (msg) =>{
+            console.log(msg)
+        });
+
     }
 }
 </script>
