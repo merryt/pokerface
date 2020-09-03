@@ -13,12 +13,14 @@
             <li v-for="game in games" v-bind:key="game.id">
                 <router-link :to="{path: '/game/' + game.id ,params:{id:game.id}}">{{game.name}}</router-link> -- {{game.status}}
             </li>
-        </ul>         
+        </ul>
+        <name></name>
     </div>
 </template>
 
 <script>
 import io from 'socket.io-client'
+import name from '../components/name'
 
 export default {
     name: 'Home',
@@ -34,6 +36,9 @@ export default {
             socket:{},
             gameName:""
         }
+    },
+    components:{
+        name
     },
     methods:{
         newGame: function(){

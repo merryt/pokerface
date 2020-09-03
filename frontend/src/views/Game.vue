@@ -1,6 +1,7 @@
 <template>
     <div class="hello">
         <h3>Poker Table</h3>
+        <p>You are:{{playerName}}</p>
         <!-- render table -->
         <!-- render list of players who are watching -->
         <!-- redner people sitting at table -->
@@ -16,7 +17,8 @@ export default {
         return {
             games:[],
             socket:{},
-            deck: []
+            deck: [],
+            playerName: "",
         }
     },
     props:{
@@ -38,7 +40,7 @@ export default {
         this.socket = io('http://localhost:3000')
         this.socket.emit('request games')
         this.socket.emit('join table', this.id)
-        
+        this.playerName = window.sessionStorage.getItem("playerName")        
         console.log(this.socket)
 
         // and when you send messages use this syntax
