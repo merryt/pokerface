@@ -53,7 +53,9 @@ io.on('connection', (socket) => {
 
 
     // joining a specific table
-    socket.on('join table',(table_id) => {
+    socket.on('join table',(table_id, playerName) => {
+        console.log("playerName: "+playerName)
+        console.log("playerSocket: "+socket.id)
         // add player to participants array for that game
         games.forEach((game) =>{
             if(game.id = table_id){
