@@ -11,3 +11,8 @@ TODO
 - RTC -- In each room players should be asked to join with video. If they have video and audio they are considered seated.
 - Poker -- We will need to have a system for drawing cards from a deck and passing them to each player
 - scoring -- For pokerface the way you score a point is by having the highest score of everyone who makes it to showdown. if you go to showdown and don't have the highest card you go to zero. First to 10 gets a star
+
+
+Additional Resources
+- Socket.io is the tool we are using for a lot of this so here is some documentation https://socket.io/get-started/chat/#Serving-HTML
+- We are using WebRTC, here is some documentation https://www.html5rocks.com/en/tutorials/webrtc/basics/ and https://www.html5rocks.com/en/tutorials/getusermedia/intro/
