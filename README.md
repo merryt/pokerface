@@ -15,4 +15,5 @@ TODO
 
 Additional Resources
 - Socket.io is the tool we are using for a lot of this so here is some documentation https://socket.io/get-started/chat/#Serving-HTML
-- We are using WebRTC, here is some documentation https://www.html5rocks.com/en/tutorials/webrtc/basics/ and https://www.html5rocks.com/en/tutorials/getusermedia/intro/
+- We are using WebRTC, here is some documentation https://www.html5rocks.com/en/tutorials/webrtc/basics/ and https://www.html5rocks.com/en/tutorials/getusermedia/intro
+- here is anouther tutorial https://levelup.gitconnected.com/build-your-own-video-chat-with-vue-webrtc-socketio-node-redis-eb51b78f9f55
