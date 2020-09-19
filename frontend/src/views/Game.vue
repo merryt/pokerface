@@ -49,11 +49,11 @@ export default {
     },
     created: function(){
         this.socket = io('http://localhost:3000')
-        this.socket.emit('request games')
-        this.socket.emit('join table', this.id)
+        this.socket.emit('request games')  
         this.playerName = window.sessionStorage.getItem("playerName")        
         this.playerId = this.socket.id
-
+        this.socket.emit('join table', this.id, this.socket.id)
+       
 
         // and when you send messages use this syntax
         // socket.to(this.id).emit('some event');

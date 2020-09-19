@@ -65,7 +65,8 @@ io.on('connection', (socket) => {
             }
         });
         // have that player join that room
-        io.to(table_id).emit("room message", "player: " + socket.id + " joined: " + table_id)
+        socket.join(table_id)
+        socket.to(table_id).broadcast.emit("room message", "just this room: player: " + socket.id + " joined: " + table_id)
     });
 
 
