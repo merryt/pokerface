@@ -22,7 +22,7 @@ suites.forEach((suit) => {
 })
 
 
-games = []
+let games = []
 
 
 
@@ -40,7 +40,6 @@ io.on('connection', (socket) => {
             "participants": [],
             "seatedPlayers": [],
         })
-        console.log(games.length)
         io.emit('list games', games)
     })
 
@@ -54,27 +53,62 @@ io.on('connection', (socket) => {
 
 
 
-    // joining a specific table
-    socket.on('join table',(table_id, playerName) => {
+    // joining ae specific table
+    socket.on('join table',(tableId, playerName) => {
         console.log("playerName: "+playerName)
         console.log("playerSocket: "+socket.id)
         // add player to participants array for that game
         games.forEach((game) =>{
-            if(game.id = table_id){
+            if(game.id === tableId){
                 game.participants.push(socket.id)
             }
         });
         // have that player join that room
-        socket.join(table_id)
-        socket.to(table_id).broadcast.emit("room message", "just this room: player: " + socket.id + " joined: " + table_id)
+        socket.join(tableId)
+        socket.to(tableId).broadcast.emit("room message", "just this room: player: " + socket.id + " joined: " + tableId)
     });
 
 
-    socket.on('take a seat', (id) => {
-        console.log("someone is taking a seat")
+    socket.on('take a seat', (tableId, playerId) => {
+        const thisGame = games.find( game => game.id === tableId)
+
+        thisGame.seatedPlayers.push(playerId)
+
+        console.log("-------Someone is taking a seat!!!--------")
+        console.log("table id: " + tableId)
+        // console.log( "games:")
+        // console.log(games)
+        console.log("player id: " + playerId)
+
+        
+        console.log("this game:")
+        console.log(thisGame)
+        
+
+        const otherUsers = thisGame.participants.filter( participant => participant != playerId)
+        if(otherUsers){
+            socket.emit("other user", otherUsers[0]);
+            socket.to(otherUsers[0]).emit("user joined", socket.id);
+        }
+
     })
+
+    socket.on("offer", payload => {
+        io.to(payload.target).emit("offer", payload);
+    });
+
+    socket.on("answer", payload => {
+        io.to(payload.target).emit("answer", payload);
+    });
+
+    socket.on("ice-candidate", incoming => {
+        io.to(incoming.target).emit("ice-candidate", incoming.candidate);
+    });
+
+
+
     // going to need to create a loop that represents dealing the cards
-    // lets make indian poker firce
+    // lets make indian poker first
 
 });
 

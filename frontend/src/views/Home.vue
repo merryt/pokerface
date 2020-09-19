@@ -11,7 +11,7 @@
         <h3>Current Games</h3>
         <ul id="games">
             <li v-for="game in games" v-bind:key="game.id">
-                <router-link :to="{path: '/game/' + game.id ,params:{id:game.id}}">{{game.name}}</router-link> -- {{game.status}}
+                <router-link :to="{path: '/game/' + game.id ,params:{id:game.id}}">{{game.name}}</router-link> -- {{game.status}} -- {{game.id}}
             </li>
         </ul>
         <name></name>
@@ -57,9 +57,7 @@ export default {
         this.socket = io('http://localhost:3000');
         // this.socket.emit('join table', 'lobby');
         this.socket.emit('request games');
-        console.log(this.socket)
         this.socket.on('list games', (games) => {
-            //console.log(games);    
             this.games = games
         });
 
