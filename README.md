@@ -5,6 +5,7 @@ I think to get it running you will need to:
 - go to the server folder and use `npm install` then `npm run serve`
 - then in the client folder do `npm install` and `npm run serve`
 - go to `http://localhost:8080` in your webbrowser (this is the client, pretty sure the serve is running on 3000)
+- I have a todo for getting it to work from port 3000, because we will need that for deploy, but for dev purposes, it runs on 8080
 
 TODO
 - For dev purposed, I think the next thing I need to do is ues session storage to build a concept of a user, eventully this will need to be upgraded to using a proper email system, firebase, or OAuth 2.0
