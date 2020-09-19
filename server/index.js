@@ -1,6 +1,7 @@
 var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
+const {v4: uuidCreator} = require('uuid')
 
 app.get('/', (req, res) => {
     // TODO:
@@ -34,11 +35,12 @@ io.on('connection', (socket) => {
         console.log("new game created")
         games.push({
             "name": name,
-            "id": Date.now(),
+            "id": uuidCreator(),
             "status": "sheaduled",
             "participants": [],
             "seatedPlayers": [],
         })
+        console.log(games.length)
         io.emit('list games', games)
     })
 
@@ -63,8 +65,7 @@ io.on('connection', (socket) => {
             }
         });
         // have that player join that room
-        socket.join(table_id);
-        io.to(table_id).emit("room message", "Someone joined " + table_id)
+        io.to(table_id).emit("room message", "player: " + socket.id + " joined: " + table_id)
     });
 
 
