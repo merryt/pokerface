@@ -7,9 +7,10 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-router": "^4.5.4"
+    "@vue/cli-plugin-router": "^4.5.4",
+    "nodemon": "^2.0.4"
   },
-  "scripts":{
-      "serve": "node index.js"
+  "scripts": {
+    "serve": "nodemon index.js"
   }
 }
