@@ -1,13 +1,21 @@
-var app = require('express')();
+var express = require('express')
+var app = express();
+var path = require('path')
+var serveStatic = require('serve-static');
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
+const { pathToFileURL } = require('url');
 const {v4: uuidCreator} = require('uuid')
+
+distDirectory = path.resolve(__dirname, '..', 'frontend/dist/')
+app.use(express.static(distDirectory));
 
 app.get('/', (req, res) => {
     // TODO:
     // this is currently broken because it is messing up all kinds of relative paths
     // look how to deploy a project that uses Vue CLI + node backend
-    res.sendFile(__dirname + '../frontend/dist/index.html');
+
+    res.sendFile(distDirectory + 'index.html');
 
 });
 

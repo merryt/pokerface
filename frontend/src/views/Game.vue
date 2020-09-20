@@ -46,7 +46,8 @@ export default {
         haveASeat: function(){
             if (!this.hasGetUserMedia()) {alert( "your browser doesn't support this" )}
             const constraints = {
-                video: true           
+                video: true,
+                audio: true           
             };
             
             navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
@@ -144,7 +145,8 @@ export default {
         }
     },
     created: function(){
-        this.socket = io('http://localhost:3000')
+        // if dev run this as localhost:8000
+        this.socket = io()
         this.socket.emit('request games')  
         this.socket.on('connect', () => this.playerId = this.socket.id);
         this.socket.emit('join table', this.id, this.playerId)
